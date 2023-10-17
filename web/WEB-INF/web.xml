@@ -1,28 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
-        <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>sample.servlet.LoginServlet</servlet-class>
+        <servlet-name>MainController</servlet-name>
+        <servlet-class>sample.controllers.MainController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>SearchResultServlet</servlet-name>
-        <servlet-class>sample.servlet.SearchResultServlet</servlet-class>
+        <servlet-name>LoginController</servlet-name>
+        <servlet-class>sample.controllers.LoginController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>SearchServlet</servlet-name>
-        <servlet-class>sample.servlet.SearchServlet</servlet-class>
+        <servlet-name>LogoutController</servlet-name>
+        <servlet-class>sample.controllers.LogoutController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateController</servlet-name>
+        <servlet-class>sample.controllers.UpdateController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SigninController</servlet-name>
+        <servlet-class>sample.controllers.SigninController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShoppingController</servlet-name>
+        <servlet-class>sample.controllers.ShoppingController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddController</servlet-name>
+        <servlet-class>sample.controllers.AddController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditController</servlet-name>
+        <servlet-class>sample.controllers.EditController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RemoveController</servlet-name>
+        <servlet-class>sample.controllers.RemoveController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BuyNowController</servlet-name>
+        <servlet-class>sample.controllers.BuyNowController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckOutController</servlet-name>
+        <servlet-class>sample.controllers.CheckOutController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoginForCheckout</servlet-name>
+        <servlet-class>sample.controllers.LoginForCheckout</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>LoginServlet</servlet-name>
-        <url-pattern>/loginservlet</url-pattern>
+        <servlet-name>MainController</servlet-name>
+        <url-pattern>/MainController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>SearchResultServlet</servlet-name>
-        <url-pattern>/searchresultservlet</url-pattern>
+        <servlet-name>LoginController</servlet-name>
+        <url-pattern>/LoginController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>SearchServlet</servlet-name>
-        <url-pattern>/searchservlet</url-pattern>
+        <servlet-name>LogoutController</servlet-name>
+        <url-pattern>/LogoutController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateController</servlet-name>
+        <url-pattern>/UpdateController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SigninController</servlet-name>
+        <url-pattern>/SigninController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShoppingController</servlet-name>
+        <url-pattern>/ShoppingController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddController</servlet-name>
+        <url-pattern>/AddController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditController</servlet-name>
+        <url-pattern>/EditController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoveController</servlet-name>
+        <url-pattern>/RemoveController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BuyNowController</servlet-name>
+        <url-pattern>/BuyNowController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckOutController</servlet-name>
+        <url-pattern>/CheckOutController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginForCheckout</servlet-name>
+        <url-pattern>/LoginForCheckout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -30,6 +102,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file> login.html </welcome-file>
+        <welcome-file>MainController</welcome-file>
     </welcome-file-list>
 </web-app>
