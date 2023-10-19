@@ -11,7 +11,7 @@ import sample.users.UserDTO;
 
 public class CheckOutController extends HttpServlet {
 
-    private static final String ERROR = "login.html";
+    private static final String ERROR = "login.jsp";
     private static final String SUCCESS = "viewCart.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -27,7 +27,7 @@ public class CheckOutController extends HttpServlet {
 
             if (userLogin == null) {
                 url = ERROR;
-                request.getRequestDispatcher(url).include(request, response);
+                request.getRequestDispatcher(url).forward(request, response); // back to login page
                 url = SUCCESS;
             } else {
                 url = SUCCESS;

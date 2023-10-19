@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import sample.shopping.Cart;
 import sample.users.UserDAO;
 import sample.users.UserDTO;
 
@@ -16,6 +17,8 @@ public class LoginController extends HttpServlet {
 
     private static final String MANAGER_PAGE = "manager.jsp";
     private static final String CUSTOMER_PAGE = "customer.jsp";
+
+    private static final String CHECK_OUT_PAGE = "CheckOutController";
 
     private static final String MANAGER = "QL";
     private static final String CUSTOMER = "KH";
@@ -36,26 +39,35 @@ public class LoginController extends HttpServlet {
             UserDAO dao = new UserDAO();
             UserDTO loginUser = dao.checkLogin(userName, passWord);
 
+            //checking cart available
+            HttpSession session = request.getSession();
+            Cart cart = (Cart) session.getAttribute("CART");
+
             // checking authentication
             if (loginUser != null) {
-                String roleID = loginUser.getRoleID();
-
-                HttpSession session = request.getSession();
+                
                 session.setAttribute("LOGIN_USER", loginUser);
+                if (cart == null) {   // truong hop login binh thuong
+                    String roleID = loginUser.getRoleID();
+                    // phan quyen o day
+                    if (MANAGER.equals(roleID)) {
+                        url = MANAGER_PAGE;
+                    } else if (CUSTOMER.equals(roleID)) {
+                        url = CUSTOMER_PAGE;
+                    } else {
+                        request.setAttribute("ERROR", "Your role is not supported");
+                    }
 
-                // phan quyen o day
-                if (MANAGER.equals(roleID)) {
-                    url = MANAGER_PAGE;
-                } else if (CUSTOMER.equals(roleID)) {
-                    url = CUSTOMER_PAGE;
-                } else {
-                    request.setAttribute("ERROR", "Your role is not supported");
+                } else {   // truong hop shopping roi login
+                    url = CHECK_OUT_PAGE;
                 }
+
             } else {
                 request.setAttribute("ERROR", "Incorrect username or password");
             }
 
         } catch (Exception e) {
+            log("Error at LoginOController" + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

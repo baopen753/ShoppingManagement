@@ -13,7 +13,7 @@ import sample.shopping.Product;
 
 public class BuyNowController extends HttpServlet {
 
-    private static final String ERROR = "shoppin.jsp";
+    private static final String ERROR = "viewCart.jsp";
     private static final String SUCCESS = "viewCart.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -41,7 +41,7 @@ public class BuyNowController extends HttpServlet {
                 if (cart.getCart().containsKey(productID)) {
                     product.setQuanity(product.getQuanity() + quantity);
                 }
-                
+
                 Product productAdd = new Product(productID, product.getProductName(), product.getPrice(), quantity);
 
                 boolean checkAdd = cart.add(productAdd);

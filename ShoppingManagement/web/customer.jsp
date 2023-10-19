@@ -9,9 +9,6 @@
     <body>
         <h1>Welcome Customer to Store</h1>
 
-        
-        
-        
         <div>
             <a href="MainController?action=Shopping_Page" >Shopping</a>
         </div>

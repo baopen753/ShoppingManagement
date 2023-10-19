@@ -38,18 +38,19 @@
                         total += product.getPrice() * product.getQuanity();
                 %>
 
-            <form action="MainController" method="Get">   <%-- editting directly from the form --%>
-
+            <form action="MainController" method="post">   <%-- editting directly from the form --%>
                 <tr>
                     <td><%= index++%></td>
 
                     <td>
                         <input type="text" name="productID" value="<%= product.getProductID()%>" readonly="" />
                     </td>
-
-                    <td><%= product.getProductName()%> </td>
-                    <td><%= product.getPrice()%> </td>
-
+                    <td>
+                        <input type="text" name="name" value="<%= product.getProductName()%>" readonly="" />
+                    </td>
+                    <td>
+                        <input type="text" name="price" value="<%= product.getPrice()%>" readonly="" />
+                    </td>
                     <td>
                         <input type="text" name="quantity" value="<%= product.getQuanity()%>" required="" />
                     </td>
@@ -76,13 +77,11 @@
     <form action="MainController" method="POST">
         <input type="submit"  name="action" value="Check out" />
     </form>
-
-
-
     <%            }
 
     %>
-    <a href="shopping.jsp">Add more</a>
+    <a href="shopping.jsp">Add more</a><br>
+    <a href="customer.jsp">Home</a>
 
 
 </body>
