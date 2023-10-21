@@ -43,10 +43,12 @@ public class LoginController extends HttpServlet {
             HttpSession session = request.getSession();
             Cart cart = (Cart) session.getAttribute("CART");
 
+          
             // checking authentication
             if (loginUser != null) {
-                
-                session.setAttribute("LOGIN_USER", loginUser);
+
+                session.setAttribute("LOGIN_USER", loginUser);   // doan nay mat 2 ngay debug - no khien toi ngao ngan
+
                 if (cart == null) {   // truong hop login binh thuong
                     String roleID = loginUser.getRoleID();
                     // phan quyen o day

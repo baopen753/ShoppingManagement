@@ -21,9 +21,11 @@ public class BuyNowController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         String url = ERROR;
-        try {
+       try {
+
             int productID = Integer.parseInt(request.getParameter("productID"));
             int quantity = 1;
+
             HttpSession session = request.getSession();
             if (session != null) {
                 Cart cart = (Cart) session.getAttribute("CART");
@@ -32,16 +34,13 @@ public class BuyNowController extends HttpServlet {
                     cart = new Cart();
                 }
 
+                // lay product tu warhouse 
                 HashMap<Integer, Product> availableProduct = (HashMap<Integer, Product>) session.getAttribute("AVAILABLE_PRODUCT");
 
                 //Product model
                 Product product = availableProduct.get(productID);
 
-                // neu truong hop chon Add to Cart truoc khi chon BuyNow --> trong cart co productID can mua roi
-                if (cart.getCart().containsKey(productID)) {
-                    product.setQuanity(product.getQuanity() + quantity);
-                }
-
+                
                 Product productAdd = new Product(productID, product.getProductName(), product.getPrice(), quantity);
 
                 boolean checkAdd = cart.add(productAdd);

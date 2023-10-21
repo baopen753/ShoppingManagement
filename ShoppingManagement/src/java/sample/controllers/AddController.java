@@ -35,11 +35,13 @@ public class AddController extends HttpServlet {
                     cart = new Cart();
                 }
 
+                // lay product tu warhouse 
                 HashMap<Integer, Product> availableProduct = (HashMap<Integer, Product>) session.getAttribute("AVAILABLE_PRODUCT");
 
                 //Product model
                 Product product = availableProduct.get(productID);
 
+                
                 Product productAdd = new Product(productID, product.getProductName(), product.getPrice(), quantity);
 
                 boolean checkAdd = cart.add(productAdd);
