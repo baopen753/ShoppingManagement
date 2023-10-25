@@ -13,6 +13,8 @@ public class CheckOutController extends HttpServlet {
 
     private static final String ERROR = "login.jsp";
     private static final String SUCCESS = "viewCart.jsp";
+    private static final String CHECK_OUT = "checkOutSuccess.jsp";
+    private static final String UPDATE_DATABASE = "UpdateDataBaseController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -28,11 +30,12 @@ public class CheckOutController extends HttpServlet {
             if (userLogin == null) {
                 url = ERROR;
                 request.getRequestDispatcher(url).forward(request, response); // back to login page
-                url = SUCCESS;
-            } else {
-                url = SUCCESS;
             }
-
+            
+            url = UPDATE_DATABASE;
+            request.getRequestDispatcher(url).forward(request, response);
+            url = CHECK_OUT;
+            
         } catch (Exception e) {
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
