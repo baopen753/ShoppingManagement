@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import sample.shopping.Cart;
-import sample.shopping.Product;
+import sample.products.ProductDTO;
 
 public class AddController extends HttpServlet {
 
@@ -36,13 +36,13 @@ public class AddController extends HttpServlet {
                 }
 
                 // lay product tu warhouse 
-                HashMap<Integer, Product> availableProduct = (HashMap<Integer, Product>) session.getAttribute("AVAILABLE_PRODUCT");
+                HashMap<Integer, ProductDTO> availableProduct = (HashMap<Integer, ProductDTO>) session.getAttribute("AVAILABLE_PRODUCT");
 
                 //Product model
-                Product product = availableProduct.get(productID);
+                ProductDTO product = availableProduct.get(productID);
 
                 
-                Product productAdd = new Product(productID, product.getProductName(), product.getPrice(), quantity);
+                ProductDTO productAdd = new ProductDTO(productID, product.getProductName(), product.getPrice(), quantity);
 
                 boolean checkAdd = cart.add(productAdd);
 

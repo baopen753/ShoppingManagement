@@ -48,6 +48,10 @@
         <servlet-name>LoginForCheckout</servlet-name>
         <servlet-class>sample.controllers.LoginForCheckout</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateDataBaseController</servlet-name>
+        <servlet-class>sample.controllers.UpdateDataBaseController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -95,6 +99,10 @@
     <servlet-mapping>
         <servlet-name>LoginForCheckout</servlet-name>
         <url-pattern>/LoginForCheckout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateDataBaseController</servlet-name>
+        <url-pattern>/UpdateDataBaseController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

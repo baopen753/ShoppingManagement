@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
-import sample.shopping.Product;
+import sample.products.ProductDTO;
 import sample.utils.DbUtils;
 
 public class UserDAO {
@@ -15,6 +15,7 @@ public class UserDAO {
     private static final String INSERT = "INSERT INTO Accounts(userName,passWord,name,roleID) VALUES(?,?,?,?)";
     private static final String UPDATE = "UPDATE Accounts SET name = ?, passWord = ? WHERE userName = ?";
     private static final String GET_PRODUCT_LIST = "SELECT * FROM Products";
+    private static final String GET_USER_ID = "SELECT userID FROM Accounts WHERE userName = ? ";
 
     public static UserDTO checkLogin(String userName, String passWord) throws SQLException {
 
@@ -167,8 +168,8 @@ public class UserDAO {
         return checkUpdate;
     }
 
-    public HashMap<Integer, Product> getListProduct() throws SQLException {
-        HashMap<Integer, Product> map = new HashMap<>();
+    public HashMap<Integer, ProductDTO> getListProduct() throws SQLException {
+        HashMap<Integer, ProductDTO> map = new HashMap<>();
 
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -188,7 +189,7 @@ public class UserDAO {
                     double price = rs.getDouble("price");
                     int quantity = rs.getInt("quantity");
 
-                    Product newProduct = new Product(productID, productName, price, quantity);
+                    ProductDTO newProduct = new ProductDTO(productID, productName, price, quantity);
                     map.put(productID, newProduct);
                 }
 
@@ -208,5 +209,40 @@ public class UserDAO {
             }
         }
         return map;
+    }
+
+    public int getUserID(String userName) throws SQLException {
+
+        int userID = 0;
+
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DbUtils.getConnection();
+            ptm = conn.prepareStatement(GET_USER_ID);
+            ptm.setString(1, userName);
+
+            rs = ptm.executeQuery();
+
+            if (rs.next()) {
+                userID = Integer.parseInt(rs.getString("userID"));
+            }
+
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+
+        return userID;
     }
 }

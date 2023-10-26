@@ -1,12 +1,7 @@
-<%-- 
-    Document   : shopping
-    Created on : Oct 14, 2023, 9:56:55 PM
-    Author     : PC
---%>
 
 <%@page import="sample.shopping.Cart"%>
 <%@page import="java.util.Map"%>
-<%@page import="sample.shopping.Product"%>
+<%@page import="sample.products.ProductDTO"%>
 <%@page import="java.util.HashMap"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -19,7 +14,7 @@
         <h1>Let's go shopping !</h1>
 
         <%
-            HashMap<Integer, Product> map = (HashMap<Integer, Product>) session.getAttribute("AVAILABLE_PRODUCT");
+            HashMap<Integer, ProductDTO> map = (HashMap<Integer, ProductDTO>) session.getAttribute("AVAILABLE_PRODUCT");
 
             if (map != null) {
         %>
@@ -28,7 +23,7 @@
 
 
         <%
-            for (Map.Entry<Integer, Product> product : map.entrySet()) {
+            for (Map.Entry<Integer, ProductDTO> product : map.entrySet()) {
 
         %>
 
@@ -70,9 +65,6 @@
 
         <%= addMessages%>
 
-
-
-
         <%
             }
 
@@ -92,7 +84,6 @@
         <a href="viewCart.jsp">View Cart</a>
 
 
-
         <%
             }
 
@@ -100,7 +91,7 @@
 
         <%= checkingRunoutOfProduct%>
 
-        
+
 
 
 

@@ -1,6 +1,6 @@
 
 
-<%@page import="sample.shopping.Product"%>
+<%@page import="sample.products.ProductDTO"%>
 <%@page import="sample.shopping.Cart"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -34,7 +34,7 @@
                 <%
                     double total = 0;
                     int index = 1;
-                    for (Product product : cart.getCart().values()) {
+                    for (ProductDTO product : cart.getCart().values()) {
                         total += product.getPrice() * product.getQuanity();
                 %>
 

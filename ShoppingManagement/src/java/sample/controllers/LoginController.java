@@ -18,7 +18,7 @@ public class LoginController extends HttpServlet {
     private static final String MANAGER_PAGE = "manager.jsp";
     private static final String CUSTOMER_PAGE = "customer.jsp";
 
-    private static final String CHECK_OUT_PAGE = "CheckOutController";
+    private static final String CHECK_OUT_PAGE = "viewCart.jsp";
 
     private static final String MANAGER = "QL";
     private static final String CUSTOMER = "KH";
@@ -60,7 +60,7 @@ public class LoginController extends HttpServlet {
                         request.setAttribute("ERROR", "Your role is not supported");
                     }
 
-                } else {   // truong hop shopping roi login
+                } else {   // truong hop shopping roi login:  sau khi login xong thi dieu huong ra duong dan nay
                     url = CHECK_OUT_PAGE;
                 }
 

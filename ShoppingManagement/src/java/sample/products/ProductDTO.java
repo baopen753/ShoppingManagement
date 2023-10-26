@@ -1,20 +1,20 @@
-package sample.shopping;
+package sample.products;
 
-public class Product {
+public class ProductDTO {
 
     private int productID;
     private String productName;
     private double price;
     private int quanity;
 
-    public Product() {
+    public ProductDTO() {
         this.productID = 0;
         this.productName = "";
         this.price = 0;
         this.quanity = 0;
     }
 
-    public Product(int productID, String productName, double price, int quanity) {
+    public ProductDTO(int productID, String productName, double price, int quanity) {
         this.productID = productID;
         this.productName = productName;
         this.price = price;

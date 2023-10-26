@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import sample.shopping.Product;
+import sample.products.ProductDTO;
 import sample.users.UserDAO;
 
 public class ShoppingController extends HttpServlet {
@@ -31,7 +31,7 @@ public class ShoppingController extends HttpServlet {
 
             UserDAO dao = new UserDAO();
 
-            HashMap<Integer, Product> productList = dao.getListProduct();
+            HashMap<Integer, ProductDTO> productList = dao.getListProduct();
             if (productList != null) {
                 HttpSession session = request.getSession();
                 session.setAttribute("AVAILABLE_PRODUCT", productList);

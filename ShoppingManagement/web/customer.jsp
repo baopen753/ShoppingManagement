@@ -1,4 +1,5 @@
 
+<%@page import="sample.users.UserDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -7,8 +8,13 @@
         <title>Customer JSP</title>
     </head>
     <body>
-        <h1>Welcome Customer to Store</h1>
+        <%
 
+            UserDTO userLogin = (UserDTO) session.getAttribute("LOGIN_USER");
+
+        %>
+        <h1>Welcome Customer to Store</h1>
+        <p>Hello <%= userLogin.getName() %>  </p>
         <div>
             <a href="MainController?action=Shopping_Page" >Shopping</a>
         </div>

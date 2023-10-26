@@ -13,7 +13,7 @@ public class CheckOutController extends HttpServlet {
 
     private static final String ERROR = "login.jsp";
     private static final String SUCCESS = "viewCart.jsp";
-    private static final String CHECK_OUT = "checkOutSuccess.jsp";
+    private static final String CHECK_OUT_SUCCESS = "checkOutSuccess.jsp";
     private static final String UPDATE_DATABASE = "UpdateDataBaseController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -31,11 +31,11 @@ public class CheckOutController extends HttpServlet {
                 url = ERROR;
                 request.getRequestDispatcher(url).forward(request, response); // back to login page
             }
-            
+
             url = UPDATE_DATABASE;
-            request.getRequestDispatcher(url).forward(request, response);
-            url = CHECK_OUT;
-            
+//            request.getRequestDispatcher(url).forward(request, response);
+//            url = CHECK_OUT;
+
         } catch (Exception e) {
         } finally {
             request.getRequestDispatcher(url).forward(request, response);

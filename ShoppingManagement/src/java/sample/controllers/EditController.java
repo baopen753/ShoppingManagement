@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import sample.shopping.Cart;
-import sample.shopping.Product;
+import sample.products.ProductDTO;
 
 public class EditController extends HttpServlet {
     
@@ -32,7 +32,7 @@ public class EditController extends HttpServlet {
             if (cart != null) {
                 // checking if cart exists, keep continue...
                 if (cart.getCart().containsKey(productID)) {
-                    Product product = cart.getCart().get(productID);
+                    ProductDTO product = cart.getCart().get(productID);
                     product.setQuanity(quantity_edit);
                     boolean check = cart.edit(productID, product);
                     if (check) {
