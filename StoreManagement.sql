@@ -1,4 +1,4 @@
-create database StoreManagement
+﻿create database StoreManagement
 
 
 create table Accounts
@@ -11,6 +11,7 @@ create table Accounts
 )
 
 
+
 create table Products
 (
    productID int identity(1,1) primary key,
@@ -21,12 +22,32 @@ create table Products
 
 create table Orders
 (
-   orderID int identity(1,1) primary key,
+   orderID int primary key,
    dateOrder date,
    userID int,
    total decimal(10,2),
-   foreign key(userID) references Users(userID)
-)
+   foreign key(userID) references Accounts(userID)
+) 
+
+
+
+------- điểu chỉnh lại kiểu dự liệu date -> datetime -------  
+alter table Orders
+add dateOrderNew datetime
+
+update Orders
+set dateOrderNew = CAST(dateOrder as datetime)
+
+alter table Orders
+drop column dateOrder
+------------------------------------------------------------
+
+
+insert into Orders(dateOrderNew,userID,total)
+values('2023-10-25 13:12:00',1,123000)
+select * from Orders
+
+
 
 create table OrderDetails
 (
@@ -38,6 +59,7 @@ create table OrderDetails
    foreign key(orderID) references Orders(orderID),
    foreign key(productID) references Products(productID) 
 )
+
 
 
 insert into Accounts(userName, passWord, name, roleID) values('trancanh',1,'Tran Quang Canh','KH')
@@ -52,7 +74,6 @@ insert into Accounts(userName, passWord, name, roleID) values('linhan', 1, 'Lin 
 insert into Accounts(userName, passWord, name, roleID) values('tuantran', 1, 'Tuan Tran', 'KH')
 insert into Accounts(userName, passWord, name, roleID) values('giangphung', 1, 'Giang Phung', 'QL')
 
-
 insert into Products(productName, price, quantity) values('BMW',55000,10)
 insert into Products(productName, price, quantity) values('Ford', 55000, 8)
 insert into Products(productName, price, quantity) values('Toyota', 35000, 12)
@@ -61,7 +82,42 @@ insert into Products(productName, price, quantity) values('Mercedes', 60000, 7)
 insert into Products(productName, price, quantity) values('Honda', 48000, 11)
 insert into Products(productName, price, quantity) values('Chevrolet', 38000, 13)
 
-
 go
 
 
+
+select * from Products
+update Products
+set quantity = 20
+where productID = 1	
+
+
+select * from OrderDetails
+delete from OrderDetails
+
+select * from Orders
+delete from Orders
+
+select * from Products
+
+
+ update Products set quantity = 30 Where productName = 'BMW'
+  update Products set quantity = 30 Where productName = 'Ford'
+
+ select userID from Accounts where userName = 'trancanh'
+ update Products set quantity = quantity - 2
+ where productID = 1
+ 
+ select top 1  orderID
+ from Orders
+ order by orderID desc
+
+ 
+ INSERT INTO OrderDetails(orderID, productID,price, quantity) VALUES (1,2,123,12)
+
+
+ select * from Accounts
+ where roleID = 'KH'
+
+
+SELECT userID,userName,name,roleID FROM Accounts WHERE roleID = 'KH' AND userName LIKE ''%a%'' 
