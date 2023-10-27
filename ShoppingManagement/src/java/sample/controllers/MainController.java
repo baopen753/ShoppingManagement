@@ -41,6 +41,9 @@ public class MainController extends HttpServlet {
     private static final String CHECKOUT_ACTION = "Check out";
     private static final String CHECKOUT_CONTROLLER = "CheckOutController";
 
+    private static final String SEARCH_CUSTOMER_ACTION = "SearchCustomer";
+    private static final String SEARCH_CUSTOMER_CONTROLLER = "SearchCustomerController";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -73,6 +76,8 @@ public class MainController extends HttpServlet {
                 url = BUY_NOW_CONTROLLER;
             } else if (CHECKOUT_ACTION.equals(action)) {
                 url = CHECKOUT_CONTROLLER;
+            } else if (SEARCH_CUSTOMER_ACTION.equals(action)) {
+                url = SEARCH_CUSTOMER_CONTROLLER;
             }
 
         } catch (Exception e) {

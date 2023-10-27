@@ -51,7 +51,7 @@ public class UpdateController extends HttpServlet {
             String confirm = request.getParameter("confirm");
 
             // tam thoi dung cach chen password  --> password vulnerability
-            UserDTO userUpdate = new UserDTO(userName, passWord, name, roleID);
+            UserDTO userUpdate = new UserDTO("", userName, passWord, name, roleID);
 
             // clean datda
             if (name.length() > 20 || name.length() < 5) {

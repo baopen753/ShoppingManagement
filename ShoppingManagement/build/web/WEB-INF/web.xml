@@ -34,7 +34,7 @@
     </servlet>
     <servlet>
         <servlet-name>RemoveController</servlet-name>
-        <servlet-class>sample.controllers.RemoveController</servlet-class>
+        <servlet-class>sample.controllers.RemoveProductController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>BuyNowController</servlet-name>
@@ -51,6 +51,10 @@
     <servlet>
         <servlet-name>UpdateDataBaseController</servlet-name>
         <servlet-class>sample.controllers.UpdateDataBaseController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchCustomerController</servlet-name>
+        <servlet-class>sample.controllers.SearchCustomerController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
@@ -103,6 +107,10 @@
     <servlet-mapping>
         <servlet-name>UpdateDataBaseController</servlet-name>
         <url-pattern>/UpdateDataBaseController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchCustomerController</servlet-name>
+        <url-pattern>/SearchCustomerController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

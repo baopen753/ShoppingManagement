@@ -4,7 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 import sample.products.ProductDTO;
 import sample.utils.DbUtils;
 
@@ -14,8 +19,9 @@ public class UserDAO {
     private static final String CHECK_DUPLICATE = "SELECT userName from Accounts WHERE userName = ?";
     private static final String INSERT = "INSERT INTO Accounts(userName,passWord,name,roleID) VALUES(?,?,?,?)";
     private static final String UPDATE = "UPDATE Accounts SET name = ?, passWord = ? WHERE userName = ?";
-    private static final String GET_PRODUCT_LIST = "SELECT * FROM Products";
+    private static final String GET_PRODUCT_LIST = "SELECT productID,productName,price,quantity FROM Products";
     private static final String GET_USER_ID = "SELECT userID FROM Accounts WHERE userName = ? ";
+    private static final String GET_CUSTOMER_LIST = "SELECT userID,userName,name,roleID FROM Accounts WHERE roleID = 'KH' AND userName LIKE ? "; // chu y syntax        
 
     public static UserDTO checkLogin(String userName, String passWord) throws SQLException {
 
@@ -43,7 +49,7 @@ public class UserDAO {
                     String name = rs.getString("name");
                     String roleID = rs.getString("roleID");
 
-                    loginUser = new UserDTO(userName, "", name, roleID);
+                    loginUser = new UserDTO("", userName, "", name, roleID);
                 }
             }
 
@@ -244,5 +250,49 @@ public class UserDAO {
         }
 
         return userID;
+    }
+
+    public List<UserDTO> getListCustomer(String searchPattern) throws SQLException {
+
+        List<UserDTO> listCustomer = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+
+        try {
+
+            conn = DbUtils.getConnection();
+            if (conn != null) {
+
+                ptm = conn.prepareStatement(GET_CUSTOMER_LIST);
+                ptm.setString(1, "%" + searchPattern + "%");
+
+                rs = ptm.executeQuery();
+
+                while (rs.next()) {
+
+                    String userName = rs.getString("userName");
+                    String userID = getUserID(userName) + "";
+                    String name = rs.getString("name");
+                    String roleID = rs.getString("roleID");
+
+                    listCustomer.add(new UserDTO(userID, userName, "", name, roleID));
+                }
+            }
+
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+
+        return listCustomer;
     }
 }

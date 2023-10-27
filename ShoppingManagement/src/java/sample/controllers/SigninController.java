@@ -11,21 +11,21 @@ import sample.users.UserDTO;
 import sample.users.UserError;
 
 public class SigninController extends HttpServlet {
-    
+
     private static final String ERROR = "signin.jsp";
     private static final String SUCCESS = "login.html";
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         UserDAO dao = new UserDAO();
         String url = ERROR;
         UserError userError = new UserError();
         boolean checkValidation = true;
-        
+
         try {
-            
+
             String userName = request.getParameter("userName");
             String name = request.getParameter("name");
             String passWord = request.getParameter("passWord");
@@ -43,20 +43,20 @@ public class SigninController extends HttpServlet {
             if (checkDuplicateUsername) {
                 checkValidation = false;
                 userError.setUsernameError("Username hasn't been used");
-            } 
+            }
 
             // 3. check password, confirmPassword
             if (!passWord.equals(confirm)) {
                 checkValidation = false;
                 userError.setPasswordError("Wrong confirm password");
-            }  
+            }
 
             // check validation
             if (checkValidation) {
                 String roleID = "KH";
-                UserDTO userCreate = new UserDTO(userName, passWord, name, roleID);
+                UserDTO userCreate = new UserDTO("", userName, passWord, name, roleID);
                 boolean checkInsert = dao.checkInsert(userCreate);
-                
+
                 if (checkInsert) {
                     url = SUCCESS;
                 } else {
@@ -66,11 +66,11 @@ public class SigninController extends HttpServlet {
                 // to get error in view if neccessary
                 request.setAttribute("ERROR", userError);
             }
-            
+
         } catch (Exception e) {
-            
+
             log("Error at SigninController" + e.toString());
-            
+
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
