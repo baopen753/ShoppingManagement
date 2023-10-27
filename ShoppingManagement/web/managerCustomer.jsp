@@ -26,6 +26,14 @@
 
         %>
 
+        <%            String listEmpty = (String) request.getAttribute("LIST_SEARCH_EMPTY");
+            if (listEmpty == null) {
+                listEmpty = "";
+            }
+        %>
+
+        <%= listEmpty%>
+
         <form action="MainController" method="post">
             Search <input type="text" name="searchPattern" value="<%= searchPattern%>"  />
             <input type="submit" name="action" value="SearchCustomer" />
@@ -43,9 +51,10 @@
             <thead>
                 <tr>
                     <th>No</th>
+                    <th>Customer ID</th>
                     <th>Username</th>
                     <th>Name</th>                  
-                    <th>Edit</th>
+                    <th>Update Customer</th>
                     <th>Remove</th>
                 </tr>
             </thead>
@@ -66,24 +75,41 @@
                         <%= customer.getUserID()%>
                     </td>
                     <td>
-                        <input type="text" name="fullName" value="<%= customer.getName()%>" >
+                        <%= customer.getUserName()%>
                     </td>
                     <td>
-                        <input type="submit" name="action" value="Update"  />
+                        <input type="text" name="name" value="<%= customer.getName()%>" >
+                    </td>
+                    <td>
+                        <input type="submit" name="action" value="Update Customer"  />
                         <input type="hidden" name="customerID" value="<%= customer.getUserID()%>" />
                         <input type="hidden" name="searchPattern" value="<%= searchPattern%>"  />
+                        <input type="hidden" name="userName" value="<%= customer.getUserName()%>"  />
                     </td>
 
                     <td>
-                        <a href="MainController?action=Delete&userID=<%= customer.getUserID()%>&search=<%= searchPattern%>">Delete</a>
+                        <a href="MainController?action=DeleteCustomerFromManager&customerID=<%= customer.getUserID()%>&search=<%= searchPattern%>">Delete</a>
                     </td>
+
+
+
                 </tr>
             </form> 
 
 
 
             <%                }
+
+
             %>
+            <%                    String updateStatus = (String) session.getAttribute("UPDATE_SUCCESS");
+                if (updateStatus == null) {
+                    updateStatus = "";
+                }
+            %>
+
+            <%= updateStatus%>
+
         </tbody>
     </table>
 

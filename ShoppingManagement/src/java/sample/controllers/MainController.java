@@ -18,7 +18,7 @@ public class MainController extends HttpServlet {
     private static final String LOGOUT_CONTROLLER = "LogoutController";
 
     private static final String UPDATE_ACTION = "Update";
-    private static final String UPDATE_CONTROLLER = "UpdateController";
+    private static final String UPDATE_CONTROLLER = "UpdateCustomerController";
 
     private static final String SHOPPING_PAGE = "Shopping_Page";
     private static final String SHOPPING_VIEW_PAGE = "ShoppingController";
@@ -43,6 +43,12 @@ public class MainController extends HttpServlet {
 
     private static final String SEARCH_CUSTOMER_ACTION = "SearchCustomer";
     private static final String SEARCH_CUSTOMER_CONTROLLER = "SearchCustomerController";
+
+    private static final String UPDATE_CUSTOMER_FROM_MANAGER_ACTION = "Update Customer";
+    private static final String UPDATE_CUSTOMER_FROM_MANAGER_CONTROLLER = "UpdateCustomerFromManagerController";
+
+    private static final String DELETE_CUSTOMER_FROM_MANAGER_ACTION = "DeleteCustomerFromManager";
+    private static final String DELETE_CUSTOMER_FROM_MANAGER_CONTROLLER = "DeleteCustomerFromManagerController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -78,6 +84,10 @@ public class MainController extends HttpServlet {
                 url = CHECKOUT_CONTROLLER;
             } else if (SEARCH_CUSTOMER_ACTION.equals(action)) {
                 url = SEARCH_CUSTOMER_CONTROLLER;
+            } else if (UPDATE_CUSTOMER_FROM_MANAGER_ACTION.equals(action)) {
+                url = UPDATE_CUSTOMER_FROM_MANAGER_CONTROLLER;
+            } else if (DELETE_CUSTOMER_FROM_MANAGER_ACTION.equals(action)) {
+                url = DELETE_CUSTOMER_FROM_MANAGER_CONTROLLER;
             }
 
         } catch (Exception e) {

@@ -12,7 +12,7 @@ import sample.users.UserDAO;
 import sample.users.UserDTO;
 import sample.users.UserError;
 
-public class UpdateController extends HttpServlet {
+public class UpdateCustomerController extends HttpServlet {
 
     private static final String ERROR = "login.jsp";
     private static final String SUCCESS = "login.jsp";
@@ -58,7 +58,7 @@ public class UpdateController extends HttpServlet {
                 checkValidation = false;
                 userError.setNameError("Name must be in [2,20]");
             }
-
+            
             if (!passWord.equals(confirm)) {
                 checkValidation = false;
                 userError.setConfirmError("Confirm password doesn't match password");

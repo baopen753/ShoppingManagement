@@ -21,7 +21,9 @@ public class UserDAO {
     private static final String UPDATE = "UPDATE Accounts SET name = ?, passWord = ? WHERE userName = ?";
     private static final String GET_PRODUCT_LIST = "SELECT productID,productName,price,quantity FROM Products";
     private static final String GET_USER_ID = "SELECT userID FROM Accounts WHERE userName = ? ";
-    private static final String GET_CUSTOMER_LIST = "SELECT userID,userName,name,roleID FROM Accounts WHERE roleID = 'KH' AND userName LIKE ? "; // chu y syntax        
+    private static final String GET_CUSTOMER_LIST = "SELECT userID,userName,name,roleID FROM Accounts WHERE roleID = 'KH' AND userName LIKE ? AND status = 1   "; // chu y syntax        
+    private static final String UPDATE_CUSTOMER_FROM_MANAGER = "UPDATE Accounts SET name = ?  WHERE userID = ?";
+    private static final String DELETE_CUSTOMER_FROM_MANAGER = "UPDATE Accounts SET status = 0  WHERE userID = ?";
 
     public static UserDTO checkLogin(String userName, String passWord) throws SQLException {
 
@@ -295,4 +297,67 @@ public class UserDAO {
 
         return listCustomer;
     }
+
+    public boolean updateCustomerFromManager(UserDTO updateCustomer) throws SQLException {
+
+        boolean check = false;
+
+        Connection conn = null;
+        PreparedStatement ptm = null;
+
+        try {
+            conn = DbUtils.getConnection();
+
+            if (conn != null) {
+                ptm = conn.prepareStatement(UPDATE_CUSTOMER_FROM_MANAGER);
+                ptm.setString(1, updateCustomer.getName());
+                ptm.setString(2, updateCustomer.getUserID());
+
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+
+        } catch (Exception e) {
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+
+        return check;
+
+    }
+
+    public boolean deleteCustomerFromManager(String userID) throws SQLException {
+
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+
+        try {
+
+            conn = DbUtils.getConnection();
+
+            if (conn != null) {
+                ptm = conn.prepareStatement(DELETE_CUSTOMER_FROM_MANAGER);
+                ptm.setString(1, userID);
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+
+        } catch (Exception e) {
+        } finally {
+
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+
+        return check;
+    }
+
 }

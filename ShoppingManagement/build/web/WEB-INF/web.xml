@@ -14,7 +14,7 @@
     </servlet>
     <servlet>
         <servlet-name>UpdateController</servlet-name>
-        <servlet-class>sample.controllers.UpdateController</servlet-class>
+        <servlet-class>sample.controllers.UpdateCustomerController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SigninController</servlet-name>
@@ -55,6 +55,14 @@
     <servlet>
         <servlet-name>SearchCustomerController</servlet-name>
         <servlet-class>sample.controllers.SearchCustomerController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateCustomerFromManagerController</servlet-name>
+        <servlet-class>sample.controllers.UpdateCustomerFromManagerController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteCustomerFromManagerController</servlet-name>
+        <servlet-class>sample.controllers.DeleteCustomerFromManagerController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
@@ -111,6 +119,14 @@
     <servlet-mapping>
         <servlet-name>SearchCustomerController</servlet-name>
         <url-pattern>/SearchCustomerController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateCustomerFromManagerController</servlet-name>
+        <url-pattern>/UpdateCustomerFromManagerController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteCustomerFromManagerController</servlet-name>
+        <url-pattern>/DeleteCustomerFromManagerController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

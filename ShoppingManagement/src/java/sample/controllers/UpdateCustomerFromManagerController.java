@@ -2,18 +2,19 @@ package sample.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import sample.users.UserDAO;
 import sample.users.UserDTO;
+import sun.security.pkcs11.wrapper.Functions;
 
-public class SearchCustomerController extends HttpServlet {
+public class UpdateCustomerFromManagerController extends HttpServlet {
 
-    private static final String ERROR = "managerCustomer.jsp";
-    private static final String SUCCESS = "managerCustomer.jsp";
+    private static final String SUCCESS = "SearchCustomerController";
+    private static final String ERROR = "SearchCustomerController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -22,25 +23,26 @@ public class SearchCustomerController extends HttpServlet {
         String url = ERROR;
 
         try {
-            String searchPattern = request.getParameter("searchPattern");
-            searchPattern.trim();
 
-            if (searchPattern == null) {
-                searchPattern = ""; 
-            }
+            HttpSession session = request.getSession();
+
+            String customerID = request.getParameter("customerID");
+            String userName = request.getParameter("userName");
+            String name = request.getParameter("name");
+            String roleID = "KH";
+
+            UserDTO updateCustomer = new UserDTO(customerID, userName, "", name, roleID);
 
             UserDAO dao = new UserDAO();
-            List<UserDTO> listCustomer = dao.getListCustomer(searchPattern);
-
-            if (listCustomer.size() > 0) {
+            boolean check = dao.updateCustomerFromManager(updateCustomer);
+            if (check) {
                 url = SUCCESS;
-                request.setAttribute("LIST_CUSTOMER", listCustomer);
-            } else {
-                request.setAttribute("LIST_SEARCH_EMPTY", "No Customer with the pattern search");
+                session.setAttribute("UPDATE_SUCCESS", "Update Successfully");
+
             }
 
         } catch (Exception e) {
-            log("Error at SearchCustomerController" + e.toString());
+            e.getStackTrace();
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
