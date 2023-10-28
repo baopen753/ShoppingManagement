@@ -35,20 +35,20 @@ public class SigninController extends HttpServlet {
             // 1. check valid username
             if (userName.length() > 15 || userName.length() < 2) {
                 checkValidation = false;
-                userError.setUsernameError("Username must be in [2,15]");
+                userError.setUsernameError("Username must be in 2 to 15 characters");
             }
 
             // 2. check username duplicate potentially
             boolean checkDuplicateUsername = dao.checkDuplicateUsername(userName);
             if (checkDuplicateUsername) {
                 checkValidation = false;
-                userError.setUsernameError("Username hasn't been used");
+                userError.setUsernameError("Username has been used");
             }
 
             // 3. check password, confirmPassword
             if (!passWord.equals(confirm)) {
                 checkValidation = false;
-                userError.setPasswordError("Wrong confirm password");
+                userError.setPasswordError("Password not the same");
             }
 
             // check validation
